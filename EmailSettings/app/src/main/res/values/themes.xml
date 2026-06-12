@@ -3,4 +3,12 @@
     <style name="Theme.EmailSettings" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your theme here if needed -->
     </style>
+    
+    <style name="Theme.EmailSettings.Transparent" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
 </resources>

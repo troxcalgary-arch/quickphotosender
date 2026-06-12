@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.example.emailsettings.app-mergeDebugResources-34:/values-v18/values-v18.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\inetb\\.gradle\\caches\\transforms-4\\4bd01a3cd5b73d88149e8daac3be2b72\\transformed\\appcompat-1.6.1\\res\\values-v18\\values-v18.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "48",
+                        "endOffsets": "99"
+                    }
+                }
+            ]
+        }
+    ]
+}

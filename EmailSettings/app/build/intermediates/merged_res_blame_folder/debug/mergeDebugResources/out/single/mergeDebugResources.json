@@ -1,0 +1,34 @@
+[
+    {
+        "merged": "com.example.emailsettings.app-debug-36:/drawable_ic_camera.xml.flat",
+        "source": "com.example.emailsettings.app-main-38:/drawable/ic_camera.xml"
+    },
+    {
+        "merged": "com.example.emailsettings.app-debug-36:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.example.emailsettings.app-main-38:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.example.emailsettings.app-debug-36:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.example.emailsettings.app-main-38:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.example.emailsettings.app-debug-36:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.example.emailsettings.app-main-38:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.example.emailsettings.app-debug-36:/layout_activity_camera.xml.flat",
+        "source": "com.example.emailsettings.app-main-38:/layout/activity_camera.xml"
+    },
+    {
+        "merged": "com.example.emailsettings.app-debug-36:/drawable_counter_background.xml.flat",
+        "source": "com.example.emailsettings.app-main-38:/drawable/counter_background.xml"
+    },
+    {
+        "merged": "com.example.emailsettings.app-debug-36:/layout_activity_main.xml.flat",
+        "source": "com.example.emailsettings.app-main-38:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.example.emailsettings.app-debug-36:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.example.emailsettings.app-main-38:/drawable/ic_launcher_background.xml"
+    }
+]

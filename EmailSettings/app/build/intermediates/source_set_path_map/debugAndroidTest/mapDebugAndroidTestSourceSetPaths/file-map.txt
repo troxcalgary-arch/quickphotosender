@@ -1,0 +1,4 @@
+com.example.emailsettings.test.app-androidTest-0 D:\Projects\quickphotosender\EmailSettings\app\build\generated\res\resValues\androidTest\debug
+com.example.emailsettings.test.app-mergeDebugAndroidTestResources-1 D:\Projects\quickphotosender\EmailSettings\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
+com.example.emailsettings.test.app-mergeDebugAndroidTestResources-2 D:\Projects\quickphotosender\EmailSettings\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir
+com.example.emailsettings.test.app-debugAndroidTest-3 D:\Projects\quickphotosender\EmailSettings\app\build\intermediates\merged_res\debugAndroidTest\mergeDebugAndroidTestResources

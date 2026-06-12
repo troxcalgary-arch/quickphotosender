@@ -1,10 +1,13 @@
-#Thu Jun 11 13:41:21 MDT 2026
-base.0=/Users/andypukhalyk/Downloads/EmailSettings/app/build/intermediates/dex/debug/mergeExtDexDebug/classes.dex
-base.1=/Users/andypukhalyk/Downloads/EmailSettings/app/build/intermediates/dex/debug/mergeProjectDexDebug/0/classes.dex
-base.2=/Users/andypukhalyk/Downloads/EmailSettings/app/build/intermediates/dex/debug/mergeProjectDexDebug/6/classes.dex
+#Fri Jun 12 08:51:33 MDT 2026
+base.0=D\:\\Projects\\quickphotosender\\EmailSettings\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
+base.1=D\:\\Projects\\quickphotosender\\EmailSettings\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
+base.2=D\:\\Projects\\quickphotosender\\EmailSettings\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\6\\classes.dex
+base.3=D\:\\Projects\\quickphotosender\\EmailSettings\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes2.dex
 path.0=classes.dex
 path.1=0/classes.dex
 path.2=6/classes.dex
+path.3=classes2.dex
 renamed.0=classes.dex
 renamed.1=classes2.dex
 renamed.2=classes3.dex
+renamed.3=classes4.dex
