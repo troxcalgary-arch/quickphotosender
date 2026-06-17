@@ -3271,6 +3271,7 @@ id exitUntilCollapsed
 id expand_activities_button
 id expanded_menu
 id fabCapture
+id fabGallery
 id fade
 id fill
 id fillCenter
@@ -3944,6 +3945,7 @@ string path_password_eye
 string path_password_eye_mask_strike_through
 string path_password_eye_mask_visible
 string path_password_strike_through
+string pick_from_gallery
 string plus
 string search_menu_title
 string searchbar_scrolling_view_behavior
@@ -5225,3 +5227,4 @@ styleable ViewPager2 android_orientation
 styleable ViewStubCompat android_id android_layout android_inflatedId
 styleable ViewTransition android_id SharedValue SharedValueId clearsTag duration ifTagNotSet ifTagSet motionInterpolator motionTarget onStateTransition pathMotionArc setsTag transitionDisable upDuration viewTransitionMode
 styleable include constraintSet
+xml file_paths

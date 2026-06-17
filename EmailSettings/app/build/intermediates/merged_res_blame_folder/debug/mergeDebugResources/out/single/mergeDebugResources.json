@@ -24,6 +24,10 @@
         "source": "com.example.emailsettings.app-main-38:/drawable/counter_background.xml"
     },
     {
+        "merged": "com.example.emailsettings.app-debug-36:/xml_file_paths.xml.flat",
+        "source": "com.example.emailsettings.app-main-38:/xml/file_paths.xml"
+    },
+    {
         "merged": "com.example.emailsettings.app-debug-36:/layout_activity_main.xml.flat",
         "source": "com.example.emailsettings.app-main-38:/layout/activity_main.xml"
     },

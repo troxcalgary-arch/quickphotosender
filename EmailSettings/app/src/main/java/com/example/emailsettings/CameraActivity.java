@@ -5,12 +5,15 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.camera.core.CameraSelector;
@@ -21,12 +24,15 @@ import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.camera.view.PreviewView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.common.util.concurrent.ListenableFuture;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -52,11 +58,55 @@ public class CameraActivity extends AppCompatActivity {
     private MaterialButton btnPlus;
     private MaterialButton btnSettings;
     private FloatingActionButton fabCapture;
+    private FloatingActionButton fabGallery;
 
     private ImageCapture imageCapture;
     private int maxPhotos = 1;
     private int photosTaken = 0;
     private List<File> capturedPhotos = new ArrayList<>();
+
+    // Gallery picker launcher
+    private final ActivityResultLauncher<Intent> galleryLauncher =
+            registerForActivityResult(
+                    new ActivityResultContracts.StartActivityForResult(),
+                    result -> {
+                        if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                            Intent data = result.getData();
+                            List<Uri> imageUris = new ArrayList<>();
+
+                            if (data.getClipData() != null) {
+                                // Multiple images selected
+                                int count = data.getClipData().getItemCount();
+                                for (int i = 0; i < count; i++) {
+                                    imageUris.add(data.getClipData().getItemAt(i).getUri());
+                                }
+                            } else if (data.getData() != null) {
+                                // Single image selected
+                                imageUris.add(data.getData());
+                            }
+
+                            if (!imageUris.isEmpty()) {
+                                // Convert URIs to files and send
+                                List<File> galleryFiles = new ArrayList<>();
+                                for (Uri uri : imageUris) {
+                                    File file = createTempFileFromUri(uri);
+                                    if (file != null) {
+                                        galleryFiles.add(file);
+                                    }
+                                }
+                                if (!galleryFiles.isEmpty()) {
+                                    capturedPhotos.addAll(galleryFiles);
+                                    photosTaken += galleryFiles.size();
+                                    updateCounterDisplay();
+                                    sendPhotosViaEmail();
+                                } else {
+                                    Toast.makeText(this,
+                                            "Failed to read selected images",
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }
+                    });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +126,7 @@ public class CameraActivity extends AppCompatActivity {
         btnPlus = findViewById(R.id.btnPlus);
         btnSettings = findViewById(R.id.btnSettings);
         fabCapture = findViewById(R.id.fabCapture);
+        fabGallery = findViewById(R.id.fabGallery);
 
         updateCounterDisplay();
 
@@ -104,6 +155,8 @@ public class CameraActivity extends AppCompatActivity {
         });
 
         fabCapture.setOnClickListener(v -> takePhoto());
+
+        fabGallery.setOnClickListener(v -> openGallery());
 
         if (allPermissionsGranted()) {
             startCamera();
@@ -256,9 +309,11 @@ public class CameraActivity extends AppCompatActivity {
 
         ArrayList<Uri> uris = new ArrayList<>();
         for (File photo : capturedPhotos) {
-            uris.add(Uri.fromFile(photo));
+            uris.add(FileProvider.getUriForFile(this,
+                    getPackageName() + ".fileprovider", photo));
         }
         emailIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris);
+        emailIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
         try {
             startActivity(Intent.createChooser(emailIntent, "Send photos via..."));
@@ -266,6 +321,40 @@ public class CameraActivity extends AppCompatActivity {
         } catch (android.content.ActivityNotFoundException ex) {
             Toast.makeText(this, "No email client installed", Toast.LENGTH_SHORT).show();
             finish();
+        }
+    }
+
+    private void openGallery() {
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        intent.setType("image/*");
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        galleryLauncher.launch(intent);
+    }
+
+    private File createTempFileFromUri(Uri uri) {
+        try {
+            File photoDir = new File(getExternalFilesDir(null), "photos");
+            if (!photoDir.exists()) {
+                photoDir.mkdirs();
+            }
+            String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(new Date());
+            File outFile = new File(photoDir, "GALLERY_" + timestamp + ".jpg");
+
+            InputStream inputStream = getContentResolver().openInputStream(uri);
+            if (inputStream == null) return null;
+            FileOutputStream outputStream = new FileOutputStream(outFile);
+            byte[] buf = new byte[4096];
+            int len;
+            while ((len = inputStream.read(buf)) > 0) {
+                outputStream.write(buf, 0, len);
+            }
+            outputStream.close();
+            inputStream.close();
+            return outFile;
+        } catch (Exception e) {
+            Log.e(TAG, "Error copying gallery image", e);
+            return null;
         }
     }
 

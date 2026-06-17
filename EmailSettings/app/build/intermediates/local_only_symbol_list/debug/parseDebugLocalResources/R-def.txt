@@ -22,6 +22,7 @@ id etRecipient
 id etSender
 id etSenderPassword
 id fabCapture
+id fabGallery
 id previewView
 id tilRecipient
 id tilSender
@@ -34,7 +35,9 @@ mipmap ic_launcher
 mipmap ic_launcher_round
 string app_name
 string minus
+string pick_from_gallery
 string plus
 string take_photo
 style Theme.EmailSettings
 style Theme.EmailSettings.Transparent
+xml file_paths
